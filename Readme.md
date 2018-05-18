@@ -2,7 +2,7 @@
 
 Jogo: Forca.
 O jogador deve acertar a palavra proposta.
-É informada a quantidade de letrasna palavra em questão.
+É informada a quantidade de letras na palavra em questão.
 O jogador deve tentar adivinhar letras que compoem a palavra.
 Caso acerte toda a palavra, ele vence. Caso contrário, perde.
 
@@ -23,4 +23,3 @@ Para executar o projeto, use o comando:
 ```
 python hang.py
 ```
-

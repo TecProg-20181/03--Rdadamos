@@ -10,11 +10,8 @@ def loadWords():
     take a while to finish.
     """
     print "Loading word list from file..."
-    # inFile: file
     inFile = open(WORDLIST_FILENAME, 'r', 0)
-    # line: string
     line = inFile.readline()
-    # wordlist: list of strings
     wordlist = string.split(line)
     print "  ", len(wordlist), "words loaded."
     return random.choice(wordlist)

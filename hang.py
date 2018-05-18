@@ -3,7 +3,7 @@ import string
 import re
 import os.path
 
-WORDLIST_FILENAME = "dicao.txt"
+WORDLIST_FILENAME = "words.txt"
 TOTAL_GUESSES = 8
 
 def loadWords():
@@ -24,7 +24,6 @@ def isWordGuessed(secretWord, lettersGuessed):
             pass
         else:
             return False
-
     return True
 
 def getGuessedWord(secretWord, lettersGuessed):
@@ -34,7 +33,6 @@ def getGuessedWord(secretWord, lettersGuessed):
             guessed += letter
         else:
             guessed += '_'
-
     return guessed
 
 def getAvailableLetters(lettersGuessed):
@@ -42,7 +40,6 @@ def getAvailableLetters(lettersGuessed):
     for letter in available:
         if letter in lettersGuessed:
             available = available.replace(letter, '')
-
     return available
 
 def isValidInput(letter):
@@ -68,30 +65,24 @@ def hangman(secretWord):
     while not isWordGuessed(secretWord, lettersGuessed) and not guessesAreOver(guessesLeft):
         print 'You have', guessesLeft, 'guesses left.'
         print 'Available letters:', getAvailableLetters(lettersGuessed)
-
         letter = raw_input('Please guess a letter: ').lower()
         if isValidInput(letter):
             if letter in secretWord:
                 lettersGuessed.append(letter)
                 print 'Good Guess: ', getGuessedWord(secretWord, lettersGuessed)
-
             elif letter in lettersGuessed:
                 print 'Oops! You have already guessed that letter: ', getGuessedWord(secretWord, lettersGuessed)
-
             else:
                 guessesLeft -=1
                 lettersGuessed.append(letter)
                 print 'Oops! That letter is not in my word: ',  getGuessedWord(secretWord, lettersGuessed)
-
         else:
             print 'Oops! Only one letter [a-z] allowed! My word: ',  getGuessedWord(secretWord, lettersGuessed)
-
         print '------------'
 
     else:
         if isWordGuessed(secretWord, lettersGuessed):
             print 'Congratulations, you won!'
-
         else:
             print 'Sorry, you ran out of guesses. The word was:', secretWord
 

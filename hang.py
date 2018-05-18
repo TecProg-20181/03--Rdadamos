@@ -1,5 +1,6 @@
 import random
 import string
+import re
 
 WORDLIST_FILENAME = "palavras.txt"
 
@@ -34,7 +35,7 @@ def getGuessedWord(secretWord, lettersGuessed):
         if letter in lettersGuessed:
             guessed += letter
         else:
-            guessed += '_ '
+            guessed += '_'
 
     return guessed
 
@@ -46,18 +47,24 @@ def getAvailableLetters(lettersGuessed):
 
     return available
 
+def checkValidInput(letter):
+    if re.match('^[a-z]$', letter):
+        return True
+    else:
+        return False
+
 def hangman(secretWord):
     guesses = 8
     lettersGuessed = []
     print 'Welcome to the game, Hangam!'
-    print 'I am thinking of a word that is', len(secretWord), ' letters long.'
+    print 'I am thinking of a word that is', len(secretWord), 'letters long.'
     print '-------------'
 
     while  isWordGuessed(secretWord, lettersGuessed) == False and guesses >0:
-        print 'You have ', guesses, 'guesses left.'
-        print 'Available letters', getAvailableLetters(lettersGuessed)
+        print 'You have', guesses, 'guesses left.'
+        print 'Available letters:', getAvailableLetters(lettersGuessed)
 
-        letter = raw_input('Please guess a letter: ')
+        letter = raw_input('Please guess a letter: ').lower()
         if letter in lettersGuessed:
             print 'Oops! You have already guessed that letter: ', getGuessedWord(secretWord, lettersGuessed)
 
@@ -65,10 +72,14 @@ def hangman(secretWord):
             lettersGuessed.append(letter)
             print 'Good Guess: ', getGuessedWord(secretWord, lettersGuessed)
 
+        elif not checkValidInput(letter):
+            print 'Oops! Only one letter [a-z] allowed! My word: ',  getGuessedWord(secretWord, lettersGuessed)
+
         else:
             guesses -=1
             lettersGuessed.append(letter)
             print 'Oops! That letter is not in my word: ',  getGuessedWord(secretWord, lettersGuessed)
+
 
         print '------------'
 
@@ -77,7 +88,7 @@ def hangman(secretWord):
             print 'Congratulations, you won!'
 
         else:
-            print 'Sorry, you ran out of guesses. The word was ', secretWord, '.'
+            print 'Sorry, you ran out of guesses. The word was:', secretWord
 
 
 secretWord = loadWords().lower()

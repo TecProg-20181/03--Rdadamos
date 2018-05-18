@@ -5,10 +5,6 @@ import re
 WORDLIST_FILENAME = "words.txt"
 
 def loadWords():
-    """
-    Depending on the size of the word list, this function may
-    take a while to finish.
-    """
     print "Loading word list from file..."
     inFile = open(WORDLIST_FILENAME, 'r', 0)
     line = inFile.readline()

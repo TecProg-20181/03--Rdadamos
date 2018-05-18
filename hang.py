@@ -73,7 +73,7 @@ def hangman(secretWord):
             elif letter in lettersGuessed:
                 print 'Oops! You have already guessed that letter: ', getGuessedWord(secretWord, lettersGuessed)
             else:
-                guessesLeft -=1
+                guessesLeft -= 1
                 lettersGuessed.append(letter)
                 print 'Oops! That letter is not in my word: ',  getGuessedWord(secretWord, lettersGuessed)
         else:

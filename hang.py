@@ -67,12 +67,12 @@ def hangman(secretWord):
 
         letter = raw_input('Please guess a letter: ').lower()
         if isValidInput(letter):
-            if letter in lettersGuessed:
-                print 'Oops! You have already guessed that letter: ', getGuessedWord(secretWord, lettersGuessed)
-
-            elif letter in secretWord:
+            if letter in secretWord:
                 lettersGuessed.append(letter)
                 print 'Good Guess: ', getGuessedWord(secretWord, lettersGuessed)
+
+            elif letter in lettersGuessed:
+                print 'Oops! You have already guessed that letter: ', getGuessedWord(secretWord, lettersGuessed)
 
             else:
                 guessesLeft -=1

@@ -47,6 +47,12 @@ def isValidInput(letter):
     else:
         return False
 
+def guessesAreOver(guessesLeft):
+    if guessesLeft > 0:
+        return False
+    else:
+        return True
+
 def hangman(secretWord):
     guessesLeft = TOTAL_GUESSES
     print guessesLeft
@@ -55,7 +61,7 @@ def hangman(secretWord):
     print 'I am thinking of a word that is', len(secretWord), 'letters long.'
     print '-------------'
 
-    while isWordGuessed(secretWord, lettersGuessed) == False and guessesLeft > 0:
+    while not isWordGuessed(secretWord, lettersGuessed) and not guessesAreOver(guessesLeft):
         print 'You have', guessesLeft, 'guesses left.'
         print 'Available letters:', getAvailableLetters(lettersGuessed)
 
@@ -79,7 +85,7 @@ def hangman(secretWord):
         print '------------'
 
     else:
-        if isWordGuessed(secretWord, lettersGuessed) == True:
+        if isWordGuessed(secretWord, lettersGuessed):
             print 'Congratulations, you won!'
 
         else:

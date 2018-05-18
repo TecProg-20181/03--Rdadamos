@@ -2,7 +2,8 @@ import random
 import string
 import re
 
-WORDLIST_FILENAME = "words.txt"
+WORDLIST_FILENAME = "dicio.txt"
+TOTAL_GUESSES = 8
 
 def loadWords():
     print "Loading word list from file..."
@@ -47,14 +48,15 @@ def isValidInput(letter):
         return False
 
 def hangman(secretWord):
-    guesses = 8
+    guessesLeft = TOTAL_GUESSES
+    print guessesLeft
     lettersGuessed = []
     print 'Welcome to the game, Hangman!'
     print 'I am thinking of a word that is', len(secretWord), 'letters long.'
     print '-------------'
 
-    while  isWordGuessed(secretWord, lettersGuessed) == False and guesses >0:
-        print 'You have', guesses, 'guesses left.'
+    while isWordGuessed(secretWord, lettersGuessed) == False and guessesLeft > 0:
+        print 'You have', guessesLeft, 'guesses left.'
         print 'Available letters:', getAvailableLetters(lettersGuessed)
 
         letter = raw_input('Please guess a letter: ').lower()
@@ -67,7 +69,7 @@ def hangman(secretWord):
                 print 'Good Guess: ', getGuessedWord(secretWord, lettersGuessed)
 
             else:
-                guesses -=1
+                guessesLeft -=1
                 lettersGuessed.append(letter)
                 print 'Oops! That letter is not in my word: ',  getGuessedWord(secretWord, lettersGuessed)
 

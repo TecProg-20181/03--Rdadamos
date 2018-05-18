@@ -2,7 +2,7 @@ import random
 import string
 import re
 
-WORDLIST_FILENAME = "palavras.txt"
+WORDLIST_FILENAME = "words.txt"
 
 def loadWords():
     """
@@ -56,7 +56,7 @@ def isValidInput(letter):
 def hangman(secretWord):
     guesses = 8
     lettersGuessed = []
-    print 'Welcome to the game, Hangam!'
+    print 'Welcome to the game, Hangman!'
     print 'I am thinking of a word that is', len(secretWord), 'letters long.'
     print '-------------'
 
@@ -89,7 +89,6 @@ def hangman(secretWord):
 
         else:
             print 'Sorry, you ran out of guesses. The word was:', secretWord
-
 
 secretWord = loadWords().lower()
 hangman(secretWord)

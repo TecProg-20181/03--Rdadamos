@@ -47,7 +47,7 @@ def getAvailableLetters(lettersGuessed):
 
     return available
 
-def checkValidInput(letter):
+def isValidInput(letter):
     if re.match('^[a-z]$', letter):
         return True
     else:
@@ -65,21 +65,21 @@ def hangman(secretWord):
         print 'Available letters:', getAvailableLetters(lettersGuessed)
 
         letter = raw_input('Please guess a letter: ').lower()
-        if letter in lettersGuessed:
-            print 'Oops! You have already guessed that letter: ', getGuessedWord(secretWord, lettersGuessed)
+        if isValidInput(letter):
+            if letter in lettersGuessed:
+                print 'Oops! You have already guessed that letter: ', getGuessedWord(secretWord, lettersGuessed)
 
-        elif letter in secretWord:
-            lettersGuessed.append(letter)
-            print 'Good Guess: ', getGuessedWord(secretWord, lettersGuessed)
+            elif letter in secretWord:
+                lettersGuessed.append(letter)
+                print 'Good Guess: ', getGuessedWord(secretWord, lettersGuessed)
 
-        elif not checkValidInput(letter):
-            print 'Oops! Only one letter [a-z] allowed! My word: ',  getGuessedWord(secretWord, lettersGuessed)
+            else:
+                guesses -=1
+                lettersGuessed.append(letter)
+                print 'Oops! That letter is not in my word: ',  getGuessedWord(secretWord, lettersGuessed)
 
         else:
-            guesses -=1
-            lettersGuessed.append(letter)
-            print 'Oops! That letter is not in my word: ',  getGuessedWord(secretWord, lettersGuessed)
-
+            print 'Oops! Only one letter [a-z] allowed! My word: ',  getGuessedWord(secretWord, lettersGuessed)
 
         print '------------'
 

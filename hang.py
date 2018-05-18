@@ -1,18 +1,22 @@
 import random
 import string
 import re
+import os.path
 
-WORDLIST_FILENAME = "dicio.txt"
+WORDLIST_FILENAME = "dicao.txt"
 TOTAL_GUESSES = 8
 
 def loadWords():
     print "Loading word list from file..."
-    inFile = open(WORDLIST_FILENAME, 'r', 0)
-    line = inFile.readline()
-    wordlist = string.split(line)
-    print "  ", len(wordlist), "words loaded."
-    return random.choice(wordlist)
-
+    if os.path.isfile(WORDLIST_FILENAME):
+        inFile = open(WORDLIST_FILENAME, 'r', 0)
+        line = inFile.readline()
+        wordlist = string.split(line)
+        print '  ', len(wordlist), "words loaded."
+        return random.choice(wordlist)
+    else:
+        print 'Oops! File', WORDLIST_FILENAME, 'not found.'
+        raise SystemExit(0)
 
 def isWordGuessed(secretWord, lettersGuessed):
     for letter in secretWord:
